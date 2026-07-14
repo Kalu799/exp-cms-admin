@@ -7,5 +7,5 @@
 
 export const config = {
   // URL de base de l'API REST WordPress.
-  apiBaseUrl: 'https://ingrwf13.cepegra-frontend.xyz/wp_5/wp-json',
+  apiBaseUrl: '',
 };
