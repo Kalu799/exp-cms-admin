@@ -98,7 +98,7 @@ async function renderVisitesList(container, visites) {
             method: 'GET',
           }
         );
-        console.log(newDetail)
+        //console.log(newDetail)
         detail = `${newDetail.acf['personnels-nom']} ${newDetail.acf['personnels-prenom']}`
         local = `${newDetail.acf['personnels-local']}`
       }
@@ -110,7 +110,7 @@ async function renderVisitesList(container, visites) {
             method: 'GET',
           }
         );
-        console.log(newDetail)
+        //console.log(newDetail)
         detail = `${newDetail.acf['formations-intitule']}`
         local = `${newDetail.acf['formations-local']}`
       }

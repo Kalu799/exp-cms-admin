@@ -8,6 +8,8 @@
  * - elles disparaissent quand l'onglet est fermé.
  *********************************************************************/
 
+import { request } from '../api/request.js';
+
 const STORAGE_KEY = 'user';
 
 /**
@@ -37,6 +39,18 @@ export function getToken() {
 }
 
 /**
+ * Récupère le role de l'utilisateur connecté
+ *
+ * @returns {object|null} role ou null si personne n'est connecté.
+ */
+export async function getRole() {
+  const rawRole = await request('/wp/v2/users/me?context=edit&_fields=roles', {method: 'GET',})
+  //console.log(rawRole.roles)
+
+  return rawRole.roles[0] ? rawRole.roles[0] : null;
+}
+
+/**
  * Sauvegarde l'utilisateur connecté.
  *
  * @param {object} user - Données de l'utilisateur.
@@ -58,9 +72,10 @@ export function clearUser() {
  *
  * @returns {boolean} true si l'utilisateur est connecté, false sinon.
  */
-export function requireAuth() {
-  if (!getUser()) {
+export async function requireAuth() {
+  if (await !getUser() || await getRole() != "administrator") {
     // Si personne n'est connecté, retour à la page de login.
+    alert("Vous n'avez pas le role requis / vous n'êtes pas connecté")
     window.location.href = 'index.html';
     return false;
   }
