@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <script src="js/main.js" defer type="module"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-page="index">
+
+  <header>
+    <h1>S'identitifer</h1>
+  </header>
+
+  <main>
+
+    <!-- Loader affiché pendant les appels API -->
+    <div id="loader" class="message hidden is-warning">
+      <div class="message-body">Chargement...</div>
+    </div>
+
+    <section>
+      <form action="" id="login-form">
+        <label for="username"></label>
+        <input type="text" name="username" id="username" placeholder="Username">
+
+        <label for="password"></label>
+        <input type="text" name="password" id="password" placeholder="Password">
+
+        <button type="submit">Connection</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+
+  </footer>
+
+</body>
+
+</html>
