@@ -63,7 +63,7 @@ async function loadVisites(loader, listing) {
     state.enCours = []
     state.historique = []
 
-    let date = new Date().toLocaleDateString()
+    let date = new Date().toLocaleDateString('fr-BE')
     //console.log(date)
 
     // On check pour les visites en cours

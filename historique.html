@@ -30,18 +30,32 @@
       <div>Chargement...</div>
     </div>
 
+    <section>
+      <form action="" id="historique-form">
+        <label for="visite-date"></label>
+        <input type="date" name="visite-date" id="visite-date">
+
+        <button type="submit">Rechercher</button>
+      </form>
+    </section>
+
     <div>
-      <table id="listing-historique">
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Type</th>
-          <th>Détails</th>
-          <th>Local</th>
-          <th>Date</th>
-          <th>Heure d'entrée</th>
-          <th>Heure de sortie</th>
-        </tr>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Type</th>
+            <th>Détails</th>
+            <th>Local</th>
+            <th>Date</th>
+            <th>Heure d'entrée</th>
+            <th>Heure de sortie</th>
+          </tr>
+        </thead>
+        <tbody id="listing-historique">
+
+        </tbody>
       </table>
     </div>
 

@@ -10,6 +10,7 @@ import { hide, qs, show, escapeHtml } from '../utils/dom.js';
 import { request } from '../api/request.js';
 
 let historique = null
+let historiqueRecherche = null
 
 export async function initHistorique() {
   // Si l'utilisateur n'est pas connecté, requireAuth() le renvoie au login.
@@ -20,9 +21,11 @@ export async function initHistorique() {
   // On récupère une seule fois les éléments HTML importants.
   const loader = qs('#loader');
   const listing = qs('#listing-historique');
+  const historiqueFrom = qs('#historique-form');
 
   // On connecte les événements de la page.
   bindSessionActions()
+  rechercheHistorique(historiqueFrom, loader, listing)
 
   // On charge les données de départ.
   await renderHistorique(loader, listing);
@@ -64,18 +67,29 @@ function getHistorique() {
 async function renderHistorique(loader, container) {
   show(loader);
 
-  getHistorique()
+  let renderedHistorique = null
 
-  console.log(historique)
+  if (historique === null) {
+    getHistorique()
+  }
 
-  if (!historique.length) {
+  if (historiqueRecherche != null) {
+    renderedHistorique = historiqueRecherche
+  }
+  else {
+    renderedHistorique = historique
+  }
+
+  //console.log(historique)
+
+  if (!renderedHistorique.length) {
     container.innerHTML = '<li>Aucune visite</li>';
     return;
   }
 
   try {
     const html = await Promise.all(
-      historique.map(async function (visite, index) {
+      renderedHistorique.map(async function (visite, index) {
 
         const visiteur = await request(
           `/wp/v2/visiteur/${visite.acf['visite-visiteur']}?_fields=id,title,status,acf`,
@@ -138,10 +152,52 @@ async function renderHistorique(loader, container) {
       })
     );
 
-    container.innerHTML += html.join('');
+    container.innerHTML = html.join('');
   }
 
   finally {
     hide(loader);
   }
+}
+
+/**
+ * Event pour rechercher dans l'historique avec une date
+ */
+async function rechercheHistorique(form, loader, listing) {
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault()
+
+    // On affiche le loader pendant la requête.
+    show(loader);
+
+    try {
+      const dateForm = new FormData(form);
+      const dateRecherchee = Object.fromEntries(dateForm.entries())
+      const date = new Date(dateRecherchee['visite-date']).toLocaleDateString('fr-BE');
+      
+      //console.log(date)
+      //console.log(historique)
+
+      if(date === "Invalid Date") {
+        historiqueRecherche = null
+        await renderHistorique(loader, listing);
+        return;
+      }
+
+      historiqueRecherche = historique.filter((visite) => visite.acf['visite-date'] === date);
+
+      //console.log(historiqueRecherche)
+
+      await renderHistorique(loader, listing);
+
+    }
+    catch (error) {
+      // En cas d'erreur, on affiche un message simple.
+      alert(error.message || 'Erreur.');
+    }
+    finally {
+      // finally s'exécute toujours, succès ou erreur.
+      hide(loader);
+    }
+  })
 }
