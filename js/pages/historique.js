@@ -124,8 +124,8 @@ async function renderHistorique(loader, container) {
 
         return `
         <tr data-id="${visite.id}" data-key="${index}">
-          <td>${infos.prenomVisiteur}</td>
           <td>${infos.nomVisiteur}</td>
+          <td>${infos.prenomVisiteur}</td>
           <td>${infos.type}</td>
           <td>${infos.detail}</td>
           <td>${infos.local}</td>
