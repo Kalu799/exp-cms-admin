@@ -30,6 +30,67 @@
       <div>Chargement...</div>
     </div>
 
+    <section>
+      <form action="" id="formations-form_add">
+        <label for="formations-intitule"></label>
+        <input type="text" name="formations-intitule" id="formations-intitule" placeholder="Intitulé" required>
+
+        <label for="formations-date"></label>
+        <input type="date" name="formations-date" id="formations-date" required>
+
+        <label for="formations-local"></label>
+        <input type="text" name="formations-local" id="formations-local" placeholder="Local" required>
+
+        <label for="formations-formateur"></label>
+        <select name="formations-formateur" id="formations-formateur" class="formations-formateur" placeholder="Sélectionner un formateur" required>
+          <option value="" selected disabled>-- Sélectionnez un formateur --</option>
+        </select>
+
+        <button type="submit">Ajouter</button>
+      </form>
+
+      <form action="" id="formations-form_edit" class="hidden">
+        <label for="formations-intitule"></label>
+        <input type="text" name="formations-intitule" id="formations-intitule" placeholder="Intitulé" required>
+
+        <label for="formations-date"></label>
+        <input type="date" name="formations-date" id="formations-date" required>
+
+        <label for="formations-local"></label>
+        <input type="text" name="formations-local" id="formations-local" placeholder="Local" required>
+
+        <label for="formations-formateur"></label>
+        <select name="formations-formateur" id="formations-formateur" class="formations-formateur" required>
+
+        </select>
+
+        <input type="hidden" name="id">
+        <input type="hidden" name="key">
+
+        </select>
+
+        <button type="submit">Modifier</button>
+        <button class="cancel-btn">Annuler</button>
+      </form>
+    </section>
+
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Intitulé</th>
+            <th>Date</th>
+            <th>Local</th>
+            <th>Formateur</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="listing-formations">
+
+        </tbody>
+      </table>
+    </div>
+
   </main>
 
   <footer>
