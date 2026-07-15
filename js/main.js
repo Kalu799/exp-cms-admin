@@ -11,8 +11,8 @@
 import { initIndex } from './pages/index.js';
 import { initVisites } from './pages/visites.js';
 import { initHistorique } from './pages/historique.js';
-//import { initFormations } from './pages/formations.js';
-//import { initPersonnels } from './pages/personnels.js';
+import { initFormations } from './pages/formations.js';
+import { initPersonnels } from './pages/personnels.js';
 
 // Dans le HTML, le body contient par exemple : data-page="index"
 // dataset.page permet de récupérer cette valeur.

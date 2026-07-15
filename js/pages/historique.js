@@ -16,6 +16,7 @@ export async function initHistorique() {
   if (!requireAuth()) {
     return;
   }
+
   // On récupère une seule fois les éléments HTML importants.
   const loader = qs('#loader');
   const listing = qs('#listing-historique');

@@ -73,10 +73,26 @@ export function clearUser() {
  * @returns {boolean} true si l'utilisateur est connecté, false sinon.
  */
 export async function requireAuth() {
-  if (await !getUser() || await getRole() != "administrator") {
+  if (await !getUser()) {
     // Si personne n'est connecté, retour à la page de login.
-    alert("Vous n'avez pas le role requis / vous n'êtes pas connecté")
+    alert("Vous n'êtes pas connecté")
     window.location.href = 'index.html';
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Protège une page qui nécessite un droit d'admin.
+ *
+ * @returns {boolean} true si l'utilisateur est connecté, false sinon.
+ */
+export async function requireAdmin() {
+  if (await getRole() != "administrator") {
+    // Si personne n'est connecté, retour à la page de visites.
+    alert("Vous n'avez pas le role requis")
+    window.location.href = 'visites.html';
     return false;
   }
 
