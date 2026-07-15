@@ -10,7 +10,7 @@
 
 import { initIndex } from './pages/index.js';
 import { initVisites } from './pages/visites.js';
-//import { initHistorique } from './pages/historique.js';
+import { initHistorique } from './pages/historique.js';
 //import { initFormations } from './pages/formations.js';
 //import { initPersonnels } from './pages/personnels.js';
 
