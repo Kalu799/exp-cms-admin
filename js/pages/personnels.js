@@ -258,7 +258,7 @@ async function renderPersonnels(loader, container) {
           <td>${infos.nom}</td>
           <td>${infos.prenom}</td>
           <td>${infos.email}</td>
-          <td>${infos.telephone}</td>
+          <td>+${infos.telephone}</td>
           <td>${infos.local}</td>
           <td>${infos.fonction}</td>
           <td>
