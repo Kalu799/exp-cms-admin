@@ -11,6 +11,8 @@ import { request } from '../api/request.js';
 
 let historique = null
 let historiqueRecherche = null
+let renderedHistorique = null
+const historiqueExportData = []
 
 export async function initHistorique() {
   // Si l'utilisateur n'est pas connecté, requireAuth() le renvoie au login.
@@ -25,6 +27,7 @@ export async function initHistorique() {
 
   // On connecte les événements de la page.
   bindSessionActions()
+  bindExport()
   rechercheHistorique(historiqueFrom, loader, listing)
 
   // On charge les données de départ.
@@ -49,6 +52,48 @@ function bindSessionActions() {
 }
 
 /**
+ * Gère le bouton d'export.
+ */
+function bindExport() {
+  const exportButton = qs('#exportBtn');
+
+  exportButton.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    // On lance la fonction d'export
+    exporterEnCSV(historiqueExportData, "historique.csv");
+  });
+}
+
+/**
+ * Gère l'export.
+ * 
+ * Généré par IA
+ */
+function exporterEnCSV(donnees, nomFichier = 'export.csv') {
+    // 1. Extraire les en-têtes (keys) et les lignes (values)
+    const enAbrege = Object.keys(donnees[0]);
+    const lignes = donnees.map(obj => enAbrege.map(key => JSON.stringify(obj[key])).join(','));
+
+    // 2. Fusionner en une seule chaîne CSV
+    const csvContenu = [enAbrege.join(','), ...lignes].join('\n');
+
+    // 3. Créer le Blob et le lien de téléchargement
+    const blob = new Blob([csvContenu], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const lien = document.createElement('a');
+    
+    lien.setAttribute('href', url);
+    lien.setAttribute('download', nomFichier);
+    lien.style.visibility = 'hidden';
+    
+    // 4. Déclencher le téléchargement
+    document.body.appendChild(lien);
+    lien.click();
+    document.body.removeChild(lien);
+}
+
+/**
  * Récupère l'historique depuis sessionStorage.
  *
  * @returns {object|null} historique ou null si il n'y en a pas
@@ -67,7 +112,7 @@ function getHistorique() {
 async function renderHistorique(loader, container) {
   show(loader);
 
-  let renderedHistorique = null
+  historiqueExportData.length = 0
 
   if (historique === null) {
     getHistorique()
@@ -129,13 +174,15 @@ async function renderHistorique(loader, container) {
         infos = {
           nomVisiteur: visiteur.acf['visiteurs-nom'],
           prenomVisiteur: visiteur.acf['visiteurs-prenom'],
-          type: visite.acf['visite-type'],
+          type: visite.acf['visite-type'][0],
           detail: detail,
           local: local,
           date: visite.acf['visite-date'],
           entree: visite.acf['visite-heure_entree'],
           sortie: visite.acf['visite-heure_sortie'],
         };
+
+        historiqueExportData.push(infos)
 
         return `
         <tr data-id="${visite.id}" data-key="${index}">
@@ -157,6 +204,7 @@ async function renderHistorique(loader, container) {
 
   finally {
     hide(loader);
+    console.log(historiqueExportData)
   }
 }
 
