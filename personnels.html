@@ -30,6 +30,79 @@
       <div>Chargement...</div>
     </div>
 
+    <section>
+      <form action="" id="personnel-form_add">
+        <label for="personnels-nom"></label>
+        <input type="text" name="personnels-nom" id="personnels-nom" placeholder="Nom" required>
+
+        <label for="personnels-prenom"></label>
+        <input type="text" name="personnels-prenom" id="personnels-prenom" placeholder="Prénom" required>
+
+        <label for="personnels-email"></label>
+        <input type="email" name="personnels-email" id="personnels-email" placeholder="E-mail" required>
+
+        <label for="personnels-telephone"></label>
+        <input type="number" name="personnels-telephone" id="personnels-telephone" placeholder="Numéro de téléphone" required>
+
+        <label for="personnels-local"></label>
+        <input type="text" name="personnels-local" id="personnels-local" placeholder="Local" required>
+
+        <label for="personnel-fonction"></label>
+        <select name="personnel-fonction" id="personnel-fonction" class="personnel-fonction" placeholder="Sélectionner une fonction" required>
+          <option value="" selected disabled>-- Sélectionnez une fonction --</option>
+        </select>
+
+        <button type="submit">Ajouter</button>
+      </form>
+
+      <form action="" id="personnel-form_edit" class="hidden">
+        <label for="personnels-nom"></label>
+        <input type="text" name="personnels-nom" id="personnels-nom" placeholder="Nom" required>
+
+        <label for="personnels-prenom"></label>
+        <input type="text" name="personnels-prenom" id="personnels-prenom" placeholder="Prénom" required>
+
+        <label for="personnels-email"></label>
+        <input type="email" name="personnels-email" id="personnels-email" placeholder="E-mail" required>
+
+        <label for="personnels-telephone"></label>
+        <input type="number" name="personnels-telephone" id="personnels-telephone" placeholder="Numéro de téléphone" required>
+
+        <label for="personnels-local"></label>
+        <input type="text" name="personnels-local" id="personnels-local" placeholder="Local" required>
+
+        <label for="personnel-fonction"></label>
+        <select name="personnel-fonction" id="personnel-fonction" class="personnel-fonction" placeholder="Sélectionner une fonction" required>
+          <option value="" selected disabled>-- Sélectionnez une fonction --</option>
+        </select>
+
+        <input type="hidden" name="id">
+        <input type="hidden" name="key">
+
+        <button type="submit">Modifier</button>
+        <button class="cancel-btn">Annuler</button>
+      </form>
+    </section>
+
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>E-mail</th>
+            <th>Téléphone</th>
+            <th>Local</th>
+            <th>Fonction</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="listing-personnels">
+
+        </tbody>
+      </table>
+    </div>
+
   </main>
 
   <footer>

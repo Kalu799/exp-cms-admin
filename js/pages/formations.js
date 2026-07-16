@@ -93,8 +93,8 @@ function bindDetailActions(listing, editForm, addForm, loader) {
  * Remplit le formulaire de modification avec les données existantes.
  *
  * @param {HTMLFormElement} form - Formulaire de modification.
- * @param {object} entreprise - Entreprise à modifier.
- * @param {number} index - Position de l'entreprise dans le tableau.
+ * @param {object} entreprise - Formation à modifier.
+ * @param {number} index - Position de la formation dans le tableau.
  */
 export function fillFormationForm(form, formation, index) {
   const acf = formation.acf || {};
